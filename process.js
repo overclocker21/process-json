@@ -24,14 +24,14 @@ function capitalizeAfterUnderscore(str) {
 }
 
 var foo = (myStr) =>
-  new Promise((resolve, reject) => {
-    let attempts = 5;
-    let modfified = myStr.replace('ic_fluent_','').replace('_filled','');
+    new Promise((resolve, reject) => {
+        let attempts = (myStr.match(new RegExp('_', 'g')) || []).length;
+        let modfified = myStr.replace('ic_fluent_','').replace('_filled','');
 
-    while (modfified.includes("_") && attempts !== 0) {
-        modfified = capitalize(capitalizeAfterUnderscore(modfified).join('').replace('_', ''));
-        attempts--;
-    }
+        while (modfified.includes("_") && attempts !== 0) {
+            modfified = capitalize(capitalizeAfterUnderscore(modfified).join('').replace('_', ''));
+            attempts--;
+        }
     resolve(modfified);
 });
 
